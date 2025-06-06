@@ -1,3 +1,4 @@
+import org.junit.Test;
 public class UserListTest {
     public static void main(String[] args) {
         UserList userList = new UserList();

@@ -1,3 +1,4 @@
+import org.junit.Test;
 public class CategoryListTest {
     public static void main(String[] args) {
         CategoryList categoryList = new CategoryList();
