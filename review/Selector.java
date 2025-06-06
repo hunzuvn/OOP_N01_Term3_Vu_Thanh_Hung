@@ -5,7 +5,7 @@ public interface Selector {
     void next();
 }
 
-public class Sequence {
+public class Selector {
     private Object[] objects;
     private int next = 0;
 
