@@ -1,4 +1,3 @@
-package com.example.librarymanagement.entity;
 
 import java.util.List;
 
