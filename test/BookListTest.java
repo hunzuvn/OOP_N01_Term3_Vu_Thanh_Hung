@@ -1,9 +1,3 @@
-package com.example.librarymanagement.test;
-
-import com.example.librarymanagement.entity.BookEntity;
-import com.example.librarymanagement.entity.CategoryEntity;
-import com.example.librarymanagement.service.BookList;
-
 import java.time.LocalDate;
 
 public class BookListTest {

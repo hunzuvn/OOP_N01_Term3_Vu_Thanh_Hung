@@ -1,8 +1,3 @@
-package com.example.librarymanagement.test;
-
-import com.example.librarymanagement.entity.CategoryEntity;
-import com.example.librarymanagement.service.CategoryList;
-
 public class CategoryListTest {
     public static void main(String[] args) {
         CategoryList categoryList = new CategoryList();

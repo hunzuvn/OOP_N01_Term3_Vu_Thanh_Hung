@@ -1,8 +1,3 @@
-package com.example.librarymanagement.test;
-
-import com.example.librarymanagement.entity.UserEntity;
-import com.example.librarymanagement.service.UserList;
-
 public class UserListTest {
     public static void main(String[] args) {
         UserList userList = new UserList();
