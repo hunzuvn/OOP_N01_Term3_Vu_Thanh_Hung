@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/borrows") // Hoặc /api/borrow-records
+@RequestMapping("/api/borrows") // hoac /api/borrow-records
 public class BorrowRecordController {
 
     @Autowired
@@ -74,8 +74,6 @@ public class BorrowRecordController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(recordDTOs);
     }
-
-    // Bạn có thể thêm endpoint để lấy các sách đang được mượn
     @GetMapping("/user/{userId}/current")
     public ResponseEntity<List<BorrowRecordDTO>> getBorrowedBooksNotReturnedByUser(@PathVariable Integer userId) {
         List<BorrowRecord> records = borrowRecordService.getBorrowedBooksNotReturnedByUser(userId);

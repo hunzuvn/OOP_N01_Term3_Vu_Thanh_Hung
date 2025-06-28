@@ -2,7 +2,7 @@ package com.library.controller;
 
 import com.library.dto.UserDTO;
 import com.library.entity.UserAccount;
-import com.library.service.UserAccountService; // <-- Dòng import đã sửa
+import com.library.service.UserAccountService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +14,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/users") // Bạn có thể giữ /api/users hoặc đổi thành /api/user-accounts
+@RequestMapping("/api/users")
 public class UserAccountController {
 
     @Autowired
-    private UserAccountService userAccountService; // <-- Đổi tên biến ở đây
+    private UserAccountService userAccountService;
 
     @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
-        List<UserAccount> userAccounts = userAccountService.getAllUserAccounts(); // <-- Gọi đúng phương thức của Service
+        List<UserAccount> userAccounts = userAccountService.getAllUserAccounts();
         List<UserDTO> userDTOs = userAccounts.stream()
                 .map(user -> modelMapper.map(user, UserDTO.class))
                 .collect(Collectors.toList());
@@ -34,9 +34,8 @@ public class UserAccountController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id) {
-        // Cần xử lý Optional trả về từ Service
         UserAccount userAccount = userAccountService.getUserAccountById(id)
-                .orElseThrow(() -> new RuntimeException("UserAccount not found with id " + id)); // Hoặc một custom exception
+                .orElseThrow(() -> new RuntimeException("UserAccount not found with id " + id));
         UserDTO userDTO = modelMapper.map(userAccount, UserDTO.class);
         return ResponseEntity.ok(userDTO);
     }
@@ -44,7 +43,7 @@ public class UserAccountController {
     @PostMapping
     public ResponseEntity<UserDTO> addUser(@Valid @RequestBody UserDTO userDTO) {
         UserAccount userRequest = modelMapper.map(userDTO, UserAccount.class);
-        UserAccount newUser = userAccountService.createUserAccount(userRequest); // <-- Gọi đúng phương thức của Service
+        UserAccount newUser = userAccountService.createUserAccount(userRequest);
         UserDTO newUserDTO = modelMapper.map(newUser, UserDTO.class);
         return new ResponseEntity<>(newUserDTO, HttpStatus.CREATED);
     }
@@ -59,7 +58,7 @@ public class UserAccountController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
-        userAccountService.deleteUserAccount(id); // <-- Gọi đúng phương thức của Service
+        userAccountService.deleteUserAccount(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -69,7 +69,7 @@ public class BorrowRecordWebController {
     }
 
     // --- Endpoint để xử lý việc trả sách khi form được gửi đi --- (Di chuyển từ WebController)
-    @PostMapping("/return") // Đường dẫn sẽ là /web/borrows/return
+    @PostMapping("/return")
     public String returnBook(@RequestParam("recordId") Integer recordId,
                              RedirectAttributes redirectAttributes) {
         try {
@@ -81,6 +81,6 @@ public class BorrowRecordWebController {
             redirectAttributes.addFlashAttribute("errorMessage", "Lỗi không xác định khi trả sách.");
             e.printStackTrace();
         }
-        return "redirect:/web/borrows"; // Chuyển hướng về trang danh sách bản ghi mượn
+        return "redirect:/web/borrows";
     }
 }

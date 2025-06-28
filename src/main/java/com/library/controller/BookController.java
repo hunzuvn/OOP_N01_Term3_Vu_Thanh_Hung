@@ -63,7 +63,6 @@ public class BookController {
         return ResponseEntity.noContent().build();
     }
 
-    // Phương thức tìm kiếm sách: bạn cần chọn cách tìm kiếm (theo title, author, category)
     @GetMapping("/search")
     public ResponseEntity<List<BookDTO>> searchBooks(
             @RequestParam(required = false) String title,
@@ -73,17 +72,17 @@ public class BookController {
 
         List<Book> books;
         if (title != null && !title.isEmpty()) {
-            books = bookService.searchBooksByTitle(title); // Đã sửa tên phương thức
+            books = bookService.searchBooksByTitle(title);
         } else if (author != null && !author.isEmpty()) {
-            books = bookService.searchBooksByAuthor(author); // Đã sửa tên phương thức
+            books = bookService.searchBooksByAuthor(author);
         } else if (category != null && !category.isEmpty()) {
-            books = bookService.getBooksByCategory(category); // Đã sửa tên phương thức
+            books = bookService.getBooksByCategory(category);
         } else if (isbn != null && !isbn.isEmpty()) {
-            Book book = bookService.getBookByIsbn(isbn); // Đã sửa tên phương thức
-            books = (book != null) ? List.of(book) : List.of(); // Trả về list
+            Book book = bookService.getBookByIsbn(isbn);
+            books = (book != null) ? List.of(book) : List.of();
         }
         else {
-            books = bookService.getAllBooks(); // Nếu không có tham số tìm kiếm, trả về tất cả
+            books = bookService.getAllBooks();
         }
 
         List<BookDTO> bookDTOs = books.stream()

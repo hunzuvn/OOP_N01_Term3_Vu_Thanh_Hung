@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trả Sách</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { margin-top: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        select, input[type="submit"] {
+            width: 300px;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #008CBA;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #007bb5;
+        }
+    </style>
+</head>
+<body>
+<h1>Trả Sách</h1>
+
+<form th:action="@{/web/return}" method="post">
+    <div>
+        <label for="recordId">Chọn Bản Ghi Mượn (chỉ các bản chưa trả):</label>
+        <select id="recordId" name="recordId" required>
+            <option value="">-- Chọn bản ghi mượn --</option>
+            <option th:each="record : ${unreturnedRecords}"
+                    th:value="${record.id}"
+                    th:text="${'ID: ' + record.id + ' - Người dùng: ' + record.user.name + ' - Sách: ' + record.book.title + ' (Hạn: ' + record.dueDate + ')'}">
+            </option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Trả Sách">
+    </div>
+</form>
+
+<a th:href="@{/web/borrows}">Quay về danh sách bản ghi mượn</a>
+</body>
+</html>
