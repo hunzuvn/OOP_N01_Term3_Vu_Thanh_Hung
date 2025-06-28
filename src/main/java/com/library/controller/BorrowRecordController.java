@@ -57,7 +57,7 @@ public class BorrowRecordController {
         return ResponseEntity.ok(updatedRecordDTO);
     }
 
-    @GetMapping("/user/{userId}") // Lấy tất cả bản ghi mượn của một người dùng
+    @GetMapping("/user/{userId}")
     public ResponseEntity<List<BorrowRecordDTO>> getBorrowRecordsByUserId(@PathVariable Integer userId) {
         List<BorrowRecord> records = borrowRecordService.getBorrowRecordsByUser(userId); // Đã sửa tên phương thức
         List<BorrowRecordDTO> recordDTOs = records.stream()

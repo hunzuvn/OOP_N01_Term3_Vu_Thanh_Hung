@@ -23,10 +23,10 @@ public class BorrowRecordWebController {
     @Autowired
     private BorrowRecordService borrowRecordService;
 
-    @Autowired // <-- THÊM DÒNG NÀY
+    @Autowired
     private UserAccountService userAccountService;
 
-    @Autowired // <-- THÊM DÒNG NÀY
+    @Autowired
     private BookService bookService;
 
     @GetMapping // Khi người dùng truy cập /web/borrows
