@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Sách</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+<h1>Danh Sách Sách</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tiêu đề</th>
+        <th>Tác giả</th>
+        <th>Thể loại</th>
+        <th>Khả dụng</th>
+        <th>NXB</th>
+        <th>Năm XB</th>
+        <th>ISBN</th>
+        <th>Mô tả</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">1</td>
+        <td th:text="${book.title}">Tiêu đề sách</td>
+        <td th:text="${book.author}">Tác giả</td>
+        <td th:text="${book.category}">Thể loại</td>
+        <td th:text="${book.available ? 'Có' : 'Không'}">Có</td>
+        <td th:text="${book.publisher}">NXB</td>
+        <td th:text="${book.publicationYear}">2023</td>
+        <td th:text="${book.isbn}">ISBN</td>
+        <td th:text="${book.description}">Mô tả</td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/web/">Quay về trang chủ</a>
+</body>
+</html>

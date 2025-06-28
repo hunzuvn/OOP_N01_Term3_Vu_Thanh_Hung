@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Bản Ghi Mượn</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .message { padding: 10px; margin-bottom: 15px; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+<h1>Danh Sách Bản Ghi Mượn</h1>
+
+<div th:if="${successMessage}" class="message success">
+    <p th:text="${successMessage}"></p>
+</div>
+<div th:if="${errorMessage}" class="message error">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<div>
+    <a th:href="@{/web/borrow-form}">Mượn sách mới</a> |
+    <a th:href="@{/web/return-form}">Trả sách</a>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Người dùng</th>
+        <th>Sách</th>
+        <th>Ngày mượn</th>
+        <th>Ngày đến hạn</th>
+        <th>Ngày trả</th>
+        <th>Đã trả</th>
+        <th>Tiền phạt</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="record : ${borrowRecords}">
+        <td th:text="${record.id}">1</td>
+        <td th:text="${record.user.name}">Tên người dùng</td>
+        <td th:text="${record.book.title}">Tên sách</td>
+        <td th:text="${record.borrowDate}">2025-01-01</td>
+        <td th:text="${record.dueDate}">2025-01-15</td>
+        <td th:text="${record.returnDate != null ? record.returnDate : 'N/A'}">2025-01-20</td>
+        <td th:text="${record.returned ? 'Có' : 'Không'}">Có/Không</td>
+        <td th:text="${record.fineAmount != null ? record.fineAmount : '0.0'}">0.0</td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/web/">Quay về trang chủ</a>
+</body>
+</html>
