@@ -1,3 +1,4 @@
+//src/main/java/com/library/service/BorrowRecordService.java
 package com.library.service;
 
 import com.library.entity.Book;
@@ -26,17 +27,16 @@ public class BorrowRecordService {
     @Autowired
     private BookRepository bookRepository;
 
-    @Transactional // Đảm bảo giao dịch cho việc lấy tất cả bản ghi mượn
+    @Transactional // việc lấy tất cả bản ghi mượn
     public List<BorrowRecord> getAllBorrowRecords() {
         return borrowRecordRepository.findAll();
     }
 
-    // Optional có thể không cần transactional nếu chỉ trả về Optional và không truy cập lazy field ngay
     public Optional<BorrowRecord> getBorrowRecordById(Integer id) {
         return borrowRecordRepository.findById(id);
     }
 
-    @Transactional // Đảm bảo giao dịch nếu có nhiều thao tác DB
+    @Transactional // có nhiều thao tác DB
     public BorrowRecord borrowBook(Integer userId, Integer bookId) {
         UserAccount userAccount = userAccountRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("UserAccount not found with id " + userId));

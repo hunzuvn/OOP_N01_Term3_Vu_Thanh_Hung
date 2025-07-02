@@ -1,48 +1,81 @@
+<!-- src/main/resources/templates/books.html -->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh Sách Sách</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Danh Sách Sách</h1>
+<div class="navbar">
+    <ul>
+        <li><a th:href="@{/web/users}">Quản lý Người dùng</a></li>
+        <li><a th:href="@{/web/books}">Quản lý Sách</a></li>
+        <li><a th:href="@{/web/borrows}">Quản lý Mượn/Trả Sách</a></li>
+    </ul>
+</div>
 
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Tiêu đề</th>
-        <th>Tác giả</th>
-        <th>Thể loại</th>
-        <th>Khả dụng</th>
-        <th>NXB</th>
-        <th>Năm XB</th>
-        <th>ISBN</th>
-        <th>Mô tả</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="book : ${books}">
-        <td th:text="${book.id}">1</td>
-        <td th:text="${book.title}">Tiêu đề sách</td>
-        <td th:text="${book.author}">Tác giả</td>
-        <td th:text="${book.category}">Thể loại</td>
-        <td th:text="${book.available ? 'Có' : 'Không'}">Có</td>
-        <td th:text="${book.publisher}">NXB</td>
-        <td th:text="${book.publicationYear}">2023</td>
-        <td th:text="${book.isbn}">ISBN</td>
-        <td th:text="${book.description}">Mô tả</td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <h1>Danh Sách Sách</h1>
 
-<a href="/web/">Quay về trang chủ</a>
-</body>
+    <div th:if="${successMessage}" class="message success">
+        <p th:text="${successMessage}"></p>
+    </div>
+    <div th:if="${errorMessage}" class="message error">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <div class="search-container">
+        <form th:action="@{/web/books}" method="get" style="display: flex; width: 100%;">
+            <input type="text" name="keyword" placeholder="Tìm kiếm theo tiêu đề hoặc tác giả..." th:value="${param.keyword}" />
+            <button type="submit" class="primary-button">Tìm kiếm</button>
+        </form>
+    </div>
+
+    <a th:href="@{/web/books/new}" class="add-button">Thêm sách mới</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tiêu đề</th>
+            <th>Tác giả</th>
+            <th>Thể loại</th>
+            <th>Khả dụng</th>
+            <th>NXB</th>
+            <th>Năm XB</th>
+            <th>ISBN</th>
+            <th>Mô tả</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.id}" data-label="ID">1</td>
+            <td th:text="${book.title}" data-label="Tiêu đề">Tiêu đề sách</td>
+            <td th:text="${book.author}" data-label="Tác giả">Tác giả</td>
+            <td th:text="${book.category}" data-label="Thể loại">Thể loại</td>
+            <td data-label="Khả dụng">
+                <span th:classappend="${book.available} ? 'status-badge available' : 'status-badge unavailable'"
+                      th:text="${book.available ? 'Có' : 'Không'}"></span>
+            </td>
+            <td th:text="${book.publisher}" data-label="NXB">NXB</td>
+            <td th:text="${book.publicationYear}" data-label="Năm XB">2023</td>
+            <td th:text="${book.isbn}" data-label="ISBN">ISBN</td>
+            <td th:text="${book.description}" data-label="Mô tả">Mô tả</td>
+            <td class="actions-cell">
+                <a th:href="@{/web/books/edit/{id}(id=${book.id})}" class="button primary-button edit-btn">Sửa</a>
+                <form th:action="@{/web/books/delete/{id}(id=${book.id})}" method="post" style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sách này?');">
+                    <button type="submit" class="button danger-button delete-btn">Xóa</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/web/" class="back-to-home">Quay về trang chủ</a>
+</div>
+<script th:src="@{/js/script.js}"></script> </body>
 </html>

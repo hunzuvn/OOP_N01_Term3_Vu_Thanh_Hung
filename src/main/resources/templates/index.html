@@ -1,24 +1,23 @@
+<!-- src/main/resources/templates/index.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hệ Thống Thư Viện</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 50px; text-align: center;}
-        h1 { color: #333; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin-bottom: 10px; }
-        a { text-decoration: none; color: #007bff; font-size: 1.2em; }
-        a:hover { text-decoration: underline; }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Chào mừng đến với Hệ thống Quản lý Thư viện</h1>
-<ul>
-    <li><a th:href="@{/web/users}">Quản lý Người dùng</a></li>
-    <li><a th:href="@{/web/books}">Quản lý Sách</a></li>
-    <li><a th:href="@{/web/borrows}">Quản lý Mượn/Trả Sách</a></li>
-</ul>
-</body>
+<div class="navbar">
+    <ul>
+        <li><a th:href="@{/web/users}">Quản lý Người dùng</a></li>
+        <li><a th:href="@{/web/books}">Quản lý Sách</a></li>
+        <li><a th:href="@{/web/borrows}">Quản lý Mượn/Trả Sách</a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <h1>Chào mừng đến với Hệ thống Quản lý Thư viện</h1>
+</div>
+<script th:src="@{/js/script.js}"></script> </body>
 </html>

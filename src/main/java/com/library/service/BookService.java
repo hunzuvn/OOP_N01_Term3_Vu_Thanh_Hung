@@ -1,3 +1,4 @@
+//src/main/java/com/library/service/BookService.java
 package com.library.service;
 
 import com.library.entity.Book;
@@ -62,7 +63,6 @@ public class BookService {
         return bookRepository.findByIsbn(isbn);
     }
 
-    // <<<<< THÊM PHƯƠNG THỨC NÀY VÀO ĐÂY >>>>>
     public List<Book> getAvailableBooks() {
         return bookRepository.findByAvailable(true);
     }

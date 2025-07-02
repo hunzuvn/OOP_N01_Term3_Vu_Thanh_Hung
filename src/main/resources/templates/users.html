@@ -1,42 +1,56 @@
+<!-- src/main/resources/templates/users.html -->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh Sách Người Dùng</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Danh Sách Người Dùng</h1>
+<div class="navbar">
+    <ul>
+        <li><a th:href="@{/web/users}">Quản lý Người dùng</a></li>
+        <li><a th:href="@{/web/books}">Quản lý Sách</a></li>
+        <li><a th:href="@{/web/borrows}">Quản lý Mượn/Trả Sách</a></li>
+    </ul>
+</div>
 
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Tên</th>
-        <th>Email</th>
-        <th>Username</th>
-        <th>Vai trò</th>
-        <th>Địa chỉ</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}">1</td>
-        <td th:text="${user.name}">Nguyễn Văn A</td>
-        <td th:text="${user.email}">email@example.com</td>
-        <td th:text="${user.username}">username</td>
-        <td th:text="${user.role}">READER</td>
-        <td th:text="${user.address}">Địa chỉ</td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <h1>Danh Sách Người Dùng</h1>
 
-<a href="/web/">Quay về trang chủ</a>
-</body>
+    <div th:if="${successMessage}" class="message success">
+        <p th:text="${successMessage}"></p>
+    </div>
+    <div th:if="${errorMessage}" class="message error">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Vai trò</th>
+            <th>Địa chỉ</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}" data-label="ID">1</td>
+            <td th:text="${user.name}" data-label="Tên">Nguyễn Văn A</td>
+            <td th:text="${user.email}" data-label="Email">email@example.com</td>
+            <td th:text="${user.username}" data-label="Username">username</td>
+            <td th:text="${user.role}" data-label="Vai trò">READER</td>
+            <td th:text="${user.address}" data-label="Địa chỉ">Địa chỉ</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/web/" class="back-to-home">Quay về trang chủ</a>
+</div>
+<script th:src="@{/js/script.js}"></script> </body>
 </html>

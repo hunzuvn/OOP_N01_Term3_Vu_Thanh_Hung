@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${formTitle}"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="navbar">
+    <ul>
+        <li><a th:href="@{/web/users}">Quản lý Người dùng</a></li>
+        <li><a th:href="@{/web/books}">Quản lý Sách</a></li>
+        <li><a th:href="@{/web/borrows}">Quản lý Mượn/Trả Sách</a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <h1 th:text="${formTitle}">Thêm Sách Mới</h1>
+
+    <form th:action="${actionUrl}" th:object="${book}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="form-group">
+            <label for="title">Tiêu đề:</label>
+            <input type="text" id="title" th:field="*{title}" required />
+            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="author">Tác giả:</label>
+            <input type="text" id="author" th:field="*{author}" required />
+            <p th:if="${#fields.hasErrors('author')}" th:errors="*{author}" class="error-message"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Thể loại:</label>
+            <input type="text" id="category" th:field="*{category}" />
+        </div>
+
+        <div class="form-group">
+            <label for="publisher">Nhà xuất bản:</label>
+            <input type="text" id="publisher" th:field="*{publisher}" />
+        </div>
+
+        <div class="form-group">
+            <label for="publicationYear">Năm xuất bản:</label>
+            <input type="number" id="publicationYear" th:field="*{publicationYear}" />
+        </div>
+
+        <div class="form-group">
+            <label for="isbn">ISBN:</label>
+            <input type="text" id="isbn" th:field="*{isbn}" />
+        </div>
+
+        <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea id="description" th:field="*{description}"></textarea>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" id="available" th:field="*{available}" />
+            <label for="available">Sách khả dụng</label>
+            <p th:if="${#fields.hasErrors('available')}" th:errors="*{available}" class="error-message"></p>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="button success-button">Lưu</button>
+            <a th:href="@{/web/books}" class="button danger-button">Hủy</a>
+        </div>
+    </form>
+</div>
+<script th:src="@{/js/script.js}"></script> </body>
+</html>
