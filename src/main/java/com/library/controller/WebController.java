@@ -1,11 +1,8 @@
-//src/main/java/com/library/controller/WebController.java
 package com.library.controller;
 
-import com.library.entity.UserAccount;
 import com.library.entity.Book;
 import com.library.entity.BorrowRecord;
 
-import com.library.service.UserAccountService;
 import com.library.service.BookService;
 import com.library.service.BorrowRecordService;
 
@@ -25,25 +22,14 @@ import java.util.List;
 public class WebController {
 
     @Autowired
-    private UserAccountService userAccountService;
-
-    @Autowired
     private BookService bookService;
 
     @Autowired
     private BorrowRecordService borrowRecordService;
 
-
     @GetMapping("/")
     public String home() {
         return "index";
-    }
-
-    @GetMapping("/users")
-    public String listUsers(Model model) {
-        List<UserAccount> users = userAccountService.getAllUserAccounts();
-        model.addAttribute("users", users);
-        return "users";
     }
 
     @GetMapping("/books")
@@ -55,8 +41,6 @@ public class WebController {
 
     @GetMapping("/borrow-form")
     public String showBorrowForm(Model model) {
-        model.addAttribute("users", userAccountService.getAllUserAccounts());
-        model.addAttribute("books", bookService.getAvailableBooks());
         return "borrowForm";
     }
 

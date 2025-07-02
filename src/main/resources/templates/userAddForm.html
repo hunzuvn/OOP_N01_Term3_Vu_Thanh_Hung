@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thêm Người Dùng Mới</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="navbar">
+  <ul>
+    <li><a th:href="@{/web/users}">Quản lý Người dùng</a></li>
+    <li><a th:href="@{/web/books}">Quản lý Sách</a></li>
+    <li><a th:href="@{/web/borrows}">Quản lý Mượn/Trả Sách</a></li>
+  </ul>
+</div>
+
+<div class="container">
+  <h1>Thêm Người Dùng Mới</h1>
+
+  <div th:if="${successMessage}" class="message success">
+    <p th:text="${successMessage}"></p>
+  </div>
+  <div th:if="${errorMessage}" class="message error">
+    <p th:text="${errorMessage}"></p>
+  </div>
+
+  <form th:action="@{/web/users/add}" method="post">
+    <div class="form-group">
+      <label for="name">Tên:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label for="username">Tên đăng nhập:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Mật khẩu:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div class="form-group">
+      <label for="role">Vai trò:</label>
+      <select id="role" name="role" required>
+        <option value="READER">Độc giả</option>
+        <option value="LIBRARIAN">Thủ thư</option>
+        <option value="ADMIN">Quản trị viên</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="address">Địa chỉ:</label>
+      <input type="text" id="address" name="address">
+    </div>
+    <div class="button-group">
+      <button type="submit" class="button success-button">Thêm Người Dùng</button>
+      <a th:href="@{/web/users}" class="button danger-button">Hủy</a>
+    </div>
+  </form>
+</div>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
-//src/main/java/com/library/service/UserAccountService.java
 package com.library.service;
 
 import com.library.entity.UserAccount;
+import com.library.exception.ResourceNotFoundException;
 import com.library.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,19 +24,17 @@ public class UserAccountService {
     }
 
     public UserAccount createUserAccount(UserAccount userAccount) {
-        // TODO: Mã hóa mật khẩu trước khi lưu
         return userAccountRepository.save(userAccount);
     }
 
     public UserAccount updateUserAccount(Integer id, UserAccount userAccountDetails) {
         UserAccount userAccount = userAccountRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("UserAccount not found with id " + id)); // Hoặc dùng Custom Exception
+                .orElseThrow(() -> new ResourceNotFoundException("UserAccount not found with id " + id));
 
         userAccount.setName(userAccountDetails.getName());
         userAccount.setEmail(userAccountDetails.getEmail());
-        userAccount.setPhone(userAccountDetails.getPhone());
         userAccount.setUsername(userAccountDetails.getUsername());
-        // userAccount.setPassword(userAccountDetails.getPassword()); // Cẩn thận khi cập nhật mật khẩu
+        userAccount.setPassword(userAccountDetails.getPassword());
         userAccount.setRole(userAccountDetails.getRole());
         userAccount.setAddress(userAccountDetails.getAddress());
 
@@ -44,7 +42,9 @@ public class UserAccountService {
     }
 
     public void deleteUserAccount(Integer id) {
-        userAccountRepository.deleteById(id);
+        UserAccount userAccount = userAccountRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("UserAccount not found with id " + id));
+        userAccountRepository.delete(userAccount);
     }
 
     public UserAccount findByUsername(String username) {

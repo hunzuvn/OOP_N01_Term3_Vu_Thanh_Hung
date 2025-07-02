@@ -1,5 +1,3 @@
-<!-- src/main/resources/templates/users.html -->
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -27,6 +25,8 @@
         <p th:text="${errorMessage}"></p>
     </div>
 
+    <a th:href="@{/web/users/add-form}" class="add-button">Thêm Người Dùng Mới</a>
+
     <table>
         <thead>
         <tr>
@@ -40,17 +40,18 @@
         </thead>
         <tbody>
         <tr th:each="user : ${users}">
-            <td th:text="${user.id}" data-label="ID">1</td>
-            <td th:text="${user.name}" data-label="Tên">Nguyễn Văn A</td>
-            <td th:text="${user.email}" data-label="Email">email@example.com</td>
-            <td th:text="${user.username}" data-label="Username">username</td>
-            <td th:text="${user.role}" data-label="Vai trò">READER</td>
-            <td th:text="${user.address}" data-label="Địa chỉ">Địa chỉ</td>
+            <td th:text="${user.id}" data-label="ID"></td>
+            <td th:text="${user.name}" data-label="Tên"></td>
+            <td th:text="${user.email}" data-label="Email"></td>
+            <td th:text="${user.username}" data-label="Username"></td>
+            <td th:text="${user.role}" data-label="Vai trò"></td>
+            <td th:text="${user.address}" data-label="Địa chỉ"></td>
         </tr>
         </tbody>
     </table>
 
     <a href="/web/" class="back-to-home">Quay về trang chủ</a>
 </div>
-<script th:src="@{/js/script.js}"></script> </body>
+<script th:src="@{/js/script.js}"></script>
+</body>
 </html>
